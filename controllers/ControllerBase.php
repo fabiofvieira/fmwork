@@ -21,6 +21,11 @@ class ControllerBase extends Controller {
     {
         $article = new Article();
         
-        var_dump($article->db->find(2));
+        $articles = $article->db->find();
+        
+        foreach($articles as $article)
+        {
+            echo $article->getTitle(), "\n";
+        }
     }
 }

@@ -16,6 +16,7 @@ use FMWork\DAO\Dao;
 class ArticleDAO extends DAO {
     
     public $model = 'Article';
+    public $table = 'articles';
     
     public function __construct()
     {

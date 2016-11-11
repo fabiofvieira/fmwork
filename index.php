@@ -1,4 +1,5 @@
 <?php
+    require_once("_functions.php");
     spl_autoload_register(function($classname){require_once str_replace( '\\', DIRECTORY_SEPARATOR, $classname ) . '.php';});
 
     \FMWork\Configs\Application::initialize();

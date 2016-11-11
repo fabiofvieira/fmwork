@@ -19,6 +19,7 @@ abstract class DAO implements ActiveRecord {
     protected $db;
     protected $model;
     protected $attributes;
+    protected $table;
     
     public function __construct()
     {
@@ -30,7 +31,20 @@ abstract class DAO implements ActiveRecord {
     
     public function find($conditions = [])
     {
-        return new $this->model;
+        try {
+            $p = $this->db->prepare("SELECT * FROM {$this->table}");
+            //$p->bindParam(':table', $this->table);
+            $p->execute();
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+            die;
+        }
+        
+        $results = [];
+        while($result = $p->fetchObject($this->model)){
+            $results[] = $result;
+        }
+        return $results;
     }
     
     public function findFirst($conditions = [])
